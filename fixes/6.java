@@ -11,9 +11,13 @@ throws ServletException, IOException {
                         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp", "root", "passw0rd");
 
                         Statement st = conn.createStatement();
-                        String sql = "SELECT * FROM users WHERE username='" + username + "' AND password='" + password + "'";
+                        String sql = "SELECT * FROM users WHERE username= ? AND password= ?";
                         System.out.println(sql);
-                        ResultSet rs = st.executeQuery(sql);
+
+                        PreparedStatement prepStmt = conn.prepareStatement(sql);
+                        prepStmt.setString(1, username);
+                        prepStmt.setString(2, password);
+                        ResultSet rs = prepStmt.executeQuery();
 
                         if (rs.next()) {
                                 HttpSession session = request.getSession();

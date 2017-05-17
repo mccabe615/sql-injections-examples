@@ -1,5 +1,5 @@
 
-String query = "SELECT * FROM users WHERE userid ='"+ userid + "'" + " AND password='" + password + "'";
+String query = "SELECT * FROM users WHERE userid=? AND password=?";
 
 String userid = request.getParameter("userid");
 String password = request.getParameter("password");

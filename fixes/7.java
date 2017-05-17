@@ -11,9 +11,12 @@ throws ServletException, IOException {
                         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp", "root", "passw0rd");
 
                         Statement st = conn.createStatement();
-                        String sql = "SELECT product_name, product_price FROM products WHERE product_name='" + product_name + "'";
+                        String sql = "SELECT product_name, product_price FROM products WHERE product_name=?";
                         System.out.println(sql);
-                        ResultSet rs = st.executeQuery(sql);
+
+                        PreparedStatement prepStmt = conn.prepareStatement(query);
+                        prepStmt.setString(1, prod_name);
+                        ResultSet rs = prepStmt.executeQuery();
 
                         while (rs.next()) {
                                 String prod_name = rs.getString("product_name");
@@ -30,4 +33,4 @@ throws ServletException, IOException {
         } finally {
                 out.close();
         }
-}     
+}

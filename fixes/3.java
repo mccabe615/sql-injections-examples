@@ -9,7 +9,7 @@ String pwd = request.getParameter("pwd");
 try{
 								con = DBConnection.getConnection();
 								stmt = con.createStatement();
-								String query = "select name, country, password from Users where email = ? and password= ?";
+								String query = "select name, country, password from Users where email = ? and password = ?";
 								System.out.println(query);
 
 								prepStmt.setString(1, id);
